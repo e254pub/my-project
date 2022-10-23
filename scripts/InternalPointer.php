@@ -1,25 +1,45 @@
 <?php
 
-class InternalPointer{
-    //С использованием end, key, prev, current
-    public function exampleOne() {
-        $testArray = ["Bmw", "Mazda", "Hyndai", "Toyota"];
-        for (end($testArray); ($i = key($testArray)) !== null; prev($testArray) ) {
-            echo($i . " : " . current($testArray) . "</br>");
+class InternalPointer
+{
+    private array $autoModels = [
+        ['auto1' => 'Bmw'],
+        ['auto2' => 'Mazda'],
+        ['auto3' => 'Hyndai'],
+        ['auto4' => 'Toyota'],
+    ];
+
+    /**
+     * С использованием end, key, prev, current
+     * @return array
+     */
+    public function arrayReverseIterator(): array
+    {
+        $newArray = [];
+        for (end($this->autoModels); (key($this->autoModels)) !== null; prev($this->autoModels)) {
+            $newArray[] = current($this->autoModels);
         }
+        return $newArray;
     }
-    //Без использования указателей
-    public function exampleTwo() {
-        $testArray = ["Bmw", "Mazda", "Hyndai", "Toyota"];
-        for ($i = count($testArray) - 1; $i >= 0; $i--) {
-            echo($i . " : " . $testArray[$i] . "</br>");
+
+    /**
+     * Без использования указателей
+     * @return array
+     */
+    public function arrayReverseOffset(): array
+    {
+        $countModels = count($this->autoModels) - 1;
+        $newArray = [];
+        for ($i = $countModels; $i >= 0; $i--) {
+            $newArray[] = $this->autoModels[$i];
         }
+        return $newArray;
     }
 }
 
 $pointer = new InternalPointer();
-echo 'С использованием end, key, prev, current </br>';
-$pointer->exampleOne();
+echo 'С использованием end, key, prev, current ';
+print_r($pointer->arrayReverseIterator());
 
-echo '</br> Без использования указателей </br>';
-$pointer->exampleTwo();
+echo 'Без использования указателей ';
+print_r($pointer->arrayReverseOffset());
