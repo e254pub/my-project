@@ -4,27 +4,30 @@ $numWidgets = 10;
 
 class ExampleReferences
 {
-    public string $car = "BMW";
+    public string $car = 'BMW';
 
-    public function exampleAssignReference() {
+    public function exampleAssignReference(): void
+    {
         $carReference = &$this->car;
-        $carReference = "Lotus";
+        $carReference = 'Lotus';
         echo $this->car; // Lotus
         echo $carReference; // Lotus
     }
 
-    public function exampleDeleteReference() {
+    public function exampleDeleteReference(): void
+    {
         $carReference = &$this->car;
-        $carReference = "Lotus";
+        $carReference = 'Lotus';
         unset($testReference);
         echo $this->car; // Lotus
     }
 
-    function exampleTransferReference(&$car) {
-        $car = "Lotus";
+    public function exampleTransferReference(&$car): void
+    {
+        $car = 'Lotus';
     }
 
-    function &getNum(): int
+    public function &getNum(): int
     {
         global $numWidgets;
         return $numWidgets;
@@ -32,11 +35,10 @@ class ExampleReferences
 }
 
 $obj = new ExampleReferences();
-$obj->exampleTransferReference($this->car);
-echo $this->car . "</br>"; //Lotus
+$obj->exampleTransferReference($obj->car);
+var_dump($obj->car); //Lotus
 
 $numWidgetsRef = &$obj->getNum();
 $numWidgetsRef--;
-echo $numWidgets; //9
-echo $numWidgetsRef; //9
-
+var_dump($numWidgets); //9
+var_dump($numWidgetsRef); //9
