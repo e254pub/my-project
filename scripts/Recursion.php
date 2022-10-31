@@ -22,13 +22,24 @@ class Recursion
     }
 
     /**
-     * факториал, от 1 до number
+     * Факториал, от 1 до number
      * @param int $number
-     * @return float|int
+     * @return int
      */
-    public function factorial(int $number): float|int
+    public function factorial(int $number): int
     {
         return ($number <= 1) ? 1 : ($number * $this->factorial($number - 1));
+    }
+
+    /**
+     * Факториал по хвостовой рекурсии
+     * @param int $number
+     * @param int $result
+     * @return int
+     */
+    public function factorialTail(int $number, int $result = 1): int
+    {
+        return ($number <= 1) ? $result : ($this->factorialTail($number - 1, $result * $number));
     }
 
     /**
