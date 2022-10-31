@@ -53,5 +53,5 @@ class Recursion
 }
 
 $recursion = new Recursion();
-array_walk_recursive($recursion->autoModels, array(&$recursion, 'switchKeyValue'));
+array_walk_recursive($recursion->autoModels, [&$recursion, 'switchKeyValue']);
 var_dump($recursion->result);
